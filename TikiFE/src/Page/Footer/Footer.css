@@ -1,0 +1,23 @@
+.container a{
+  font-size: smaller;
+  text-decoration: none;
+  color: rgb(90, 88, 86);
+}
+
+.footerBc{
+  background-color: white !important;
+  margin-bottom: -13px;
+}
+
+.container a:hover {
+  text-decoration: underline;
+}
+
+.fa-brands{
+  font-size: 40px;
+  margin-left: 20px;
+}
+
+.about-company p{
+  font-size: small;
+}
