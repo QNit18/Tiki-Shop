@@ -45,13 +45,8 @@
   display: inline;
 }
 
-.product-item .col-lg-2{
-  width: 20%;
-}
-
 .card-text{
   font-size: 12px;
-  max-height: 60px;
 }
 
 .percent-discount{
@@ -64,8 +59,7 @@
   opacity: 0.8;
 }
 
-.vote-product{
-  font-size: small;
-  margin-top: -20px;
+
+.product-cart{
   margin-bottom: 20px;
 }
