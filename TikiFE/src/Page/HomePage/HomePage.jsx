@@ -110,7 +110,7 @@ const HomePage = () => {
         <div className="col-lg-10 product-item">
           <div className="row">
             <div className="col-lg-3 col-sm-4 col-6 product-cart">
-              <div className="card card-item">
+              <a href="/123" className="card card-item">
                 <img
                   src="https://salt.tikicdn.com/cache/280x280/ts/product/1a/35/d6/9cf8ccda6c0577918ca45f168c7e5916.jpg.webp"
                   class="card-img-top"
@@ -134,7 +134,7 @@ const HomePage = () => {
                   <hr />
                   <p className="status-shipper">Giao siêu tốc 2h</p>
                 </div>
-              </div>
+              </a>
             </div>
             <div className="col-lg-3 col-sm-4 col-6 product-cart">
               <div className="card card-item">

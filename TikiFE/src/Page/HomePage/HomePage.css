@@ -63,3 +63,7 @@
 .product-cart{
   margin-bottom: 20px;
 }
+
+.card-body:hover p{
+  text-decoration: none !important;
+}

@@ -1,0 +1,88 @@
+.info-author p {
+  margin: 0;
+  margin-left: 10px;
+}
+
+.info-author a {
+  color: blue;
+}
+
+.imgae-after-responsive{
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.table-info-product hr {
+  margin-top: -5px;
+  opacity: 0.2;
+}
+
+.table-info-product p {
+  font-size: smaller;
+}
+
+.table-info-product .info-supiler {
+  opacity: 0.5;
+}
+
+.sub-product {
+  width: 30px;
+  height: 30px;
+}
+
+.count-product {
+  border-radius: 5px;
+  border: 2px solid rgb(109, 107, 107);
+  width: 40px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-quantity-product {
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid rgb(109, 107, 107);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-quantity-product:hover {
+  background-color: rgb(11, 109, 255);
+  color: white;
+}
+
+.btn-status-custom {
+  border: 1px solid blue !important;
+  color: blue !important;
+  padding: 5px !important;
+}
+
+.btn-status-custom:hover {
+  background-color: blue !important;
+  color: rgb(255, 255, 255) !important;
+  padding: 5px !important;
+}
+
+.btn-buy-now {
+  background-color: red !important;
+  color: white !important;
+  padding: 7px !important;
+}
+
+.btn-buy-now:hover{
+  border: 2px solid red !important;
+  background-color: rgb(255, 255, 255) !important;
+  color: red !important;
+  padding: 7px !important;
+}
+
+@media (max-width: 992px) {
+  .check-quantity-product{
+    margin-top: 10px;
+  }
+}
