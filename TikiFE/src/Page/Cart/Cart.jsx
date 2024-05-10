@@ -55,7 +55,7 @@ const Cart = () => {
               <div className="row">
                 <div className="col-lg-6 d-flex">
                   <div className="col-lg-3 image-product-card">
-                    <img src="https://salt.tikicdn.com/cache/w160/ts/product/81/d0/dc/98a3aacdef091d52a1e23f1dbcaf7b95.jpg.webp" />
+                    <img alt="" src="https://salt.tikicdn.com/cache/w160/ts/product/81/d0/dc/98a3aacdef091d52a1e23f1dbcaf7b95.jpg.webp" />
                   </div>
                   <div className="ms-2">
                     <i
@@ -89,7 +89,7 @@ const Cart = () => {
               <div className="row">
                 <div className="col-lg-6 d-flex">
                   <div className="col-lg-3 image-product-card">
-                    <img src="https://salt.tikicdn.com/cache/w160/ts/product/81/d0/dc/98a3aacdef091d52a1e23f1dbcaf7b95.jpg.webp" />
+                    <img alt="" src="https://salt.tikicdn.com/cache/w160/ts/product/81/d0/dc/98a3aacdef091d52a1e23f1dbcaf7b95.jpg.webp" />
                   </div>
                   <div className="ms-2">
                     <i
@@ -123,7 +123,7 @@ const Cart = () => {
               <div className="row">
                 <div className="col-lg-6 d-flex">
                   <div className="col-lg-3 image-product-card">
-                    <img src="https://salt.tikicdn.com/cache/w160/ts/product/81/d0/dc/98a3aacdef091d52a1e23f1dbcaf7b95.jpg.webp" />
+                    <img alt="" src="https://salt.tikicdn.com/cache/w160/ts/product/81/d0/dc/98a3aacdef091d52a1e23f1dbcaf7b95.jpg.webp" />
                   </div>
                   <div className="ms-2">
                     <i

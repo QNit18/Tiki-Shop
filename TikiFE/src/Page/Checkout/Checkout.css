@@ -1,0 +1,16 @@
+.product-checkout{
+  border: 1px solid rgba(233, 19, 233, 0.295);
+  border-radius: 10px;
+}
+
+.info-to-order{
+  font-size: 14px;
+}
+
+.title-order{
+  color: rgb(225, 77, 255);
+  border: 3px solid rgb(255, 91, 91);
+  padding: 10px;
+  border-radius: 10px;
+  background-color: aqua;
+}

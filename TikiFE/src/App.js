@@ -4,6 +4,7 @@ import Footer from './Page/Footer/Footer';
 import HomePage from './Page/HomePage/HomePage';
 import DetailProduct from './Page/DetailProduct/DetailProduct';
 import Cart from './Page/Cart/Cart';
+import Checkout from './Page/Checkout/Checkout';
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       <Navbar/>
       {/* <HomePage/> */}
       {/* <DetailProduct/> */}
-      <Cart/>
+      {/* <Cart/> */}
+      <Checkout/>
       <Footer/>
     </>
   );
