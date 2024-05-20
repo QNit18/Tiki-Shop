@@ -31,3 +31,19 @@
     margin-top: 10px;
   }
 }
+
+.unit-quantity{
+  font-size: 15px;
+}
+
+.unit-quantity button{
+  font-size: larger;
+  font-weight: bolder;
+  border: none;
+  background-color: white;
+}
+
+.unit-quantity button:hover{
+  color: red;
+}
+

@@ -15,13 +15,9 @@ import lombok.experimental.FieldDefaults;
 public class Attribute {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-
-    String code;
-    String name;
-    String value;
-
-    @ManyToOne
-    @JoinColumn(name = "specification_id")
-    private Specification specification;
+    private Long id;
+    private String code;
+    private String name;
+    private String value;
+    private Long specification_id;
 }

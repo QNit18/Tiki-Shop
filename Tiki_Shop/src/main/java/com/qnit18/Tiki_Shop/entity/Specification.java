@@ -15,11 +15,11 @@ import java.util.List;
 @Entity
 public class Specification {
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
 
-    String name;
-
-    @OneToMany(mappedBy = "specification", cascade = CascadeType.ALL)
-    List<Attribute> attributes;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "specification_id")
+    private List<Attribute> attributes;
 }

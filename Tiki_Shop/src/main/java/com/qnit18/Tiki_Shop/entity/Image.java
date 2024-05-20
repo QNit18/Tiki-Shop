@@ -13,27 +13,25 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "base_url", length = 2048)
-    private String baseUrl;
+    @Column(name = "base_url")
+    private String base_url;
 
     @Column(name = "is_gallery")
-    private Boolean isGallery;
+    private boolean is_gallery;
 
     private String label;
 
-    @Column(name = "large_url", length = 2048)
-    private String largeUrl;
+    @Column(name = "large_url")
+    private String large_url;
 
-    @Column(name = "medium_url", length = 2048)
-    private String mediumUrl;
+    @Column(name = "medium_url")
+    private String medium_url;
+
+    @Column(name = "small_url")
+    private String small_url;
+
+    @Column(name = "thumbnail_url")
+    private String thumbnail_url;
 
     private Integer position;
-
-    @Column(name = "small_url", length = 2048)
-    private String smallUrl;
-
-    @Column(name = "thumbnail_url", length = 2048)
-    private String thumbnailUrl;
-
 }

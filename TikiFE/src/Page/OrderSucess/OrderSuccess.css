@@ -1,19 +1,19 @@
-.product-checkout{
+.product-checkout {
   border: 1px solid rgba(255, 135, 255, 0.295);
   border-radius: 10px;
 }
 
-.info-to-order{
+.info-to-order {
   font-size: 14px;
 }
 
-.title-order{
+.title-order {
   color: #15a0fc;
   padding: 10px;
   border-radius: 10px;
   background-color: rgb(224, 224, 224);
 }
 
-.info-product-card{
+.info-product-card {
   font-size: larger;
 }

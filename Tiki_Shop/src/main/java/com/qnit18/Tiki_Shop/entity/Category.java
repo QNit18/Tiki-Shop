@@ -13,12 +13,11 @@ import org.springframework.data.relational.core.sql.In;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-    String name;
-    boolean isLeaf;
+    private Long id;
+    private String name;
+    private boolean isLeaf;
 }

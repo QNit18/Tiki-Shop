@@ -1,61 +1,124 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import "./DetailProduct.css";
+import { useNavigate, useParams } from "react-router-dom";
 
 const DetailProduct = () => {
+  const { id } = useParams();
+  const [book, setBook] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [quantity, setQuantity] = useState(1);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchBookDetails = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/api/books/${id}`);
+        const data = await response.json();
+        setBook(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching book details:", error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchBookDetails();
+  }, [id]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  const handleChangeQuantity = (change) => {
+    setQuantity((prevQuantity) => Math.max(1, prevQuantity + change));
+  };
+
+  const handleAddCart = () => {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const itemIndex = cartItems.findIndex((item) => item.id === book.id);
+
+    if (itemIndex > -1) {
+      cartItems[itemIndex].quantity += quantity;
+    } else {
+      cartItems.push({
+        id: book.id,
+        name: book.name,
+        price: book.listPrice,
+        quantity,
+        image: book.images[0].thumbnail_url,
+        company: book.specifications[0].attributes[0].value,
+      });
+    }
+
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  };
+
+  const handleBuyNow = () => {
+    navigate("/cart");
+  };
+
+  const formatDescription = (description) => {
+    return description.replace(/\n/g, "<br>");
+  };
+
+  const formatPrice = (price) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
+
   return (
     <div>
       <div className="container mt-3 mb-3">
         <div className="row">
           <div className="col-lg-3 d-none d-lg-block">
-            <div class="card">
+            <div className="card">
               <img
-                src="https://salt.tikicdn.com/cache/750x750/ts/product/01/66/58/fe886ea64fb2b7de001d0bc4957fac49.jpg.webp"
-                class="card-img-top"
+                src={book.images[0].base_url}
+                className="card-img-top"
                 alt="..."
               />
-              <div class="card-body d-none d-lg-block">
+              <div className="card-body d-none d-lg-block">
                 <div className="carousel-image row mb-2">
                   <img
                     className="col-lg-3"
-                    src="https://salt.tikicdn.com/cache/750x750/ts/product/01/66/58/fe886ea64fb2b7de001d0bc4957fac49.jpg.webp"
+                    src={book.images[0].thumbnail_url}
                     alt="..."
                   />
                   <img
                     className="col-lg-3"
-                    src="https://salt.tikicdn.com/cache/750x750/ts/product/01/66/58/fe886ea64fb2b7de001d0bc4957fac49.jpg.webp"
+                    src={book.images[0].thumbnail_url}
                     alt="..."
                   />
                   <img
                     className="col-lg-3"
-                    src="https://salt.tikicdn.com/cache/750x750/ts/product/01/66/58/fe886ea64fb2b7de001d0bc4957fac49.jpg.webp"
+                    src={book.images[0].thumbnail_url}
                     alt="..."
                   />
                   <img
                     className="col-lg-3"
-                    src="https://salt.tikicdn.com/cache/750x750/ts/product/01/66/58/fe886ea64fb2b7de001d0bc4957fac49.jpg.webp"
+                    src={book.images[0].thumbnail_url}
                     alt="..."
                   />
                 </div>
-                <h6 class="card-title">Đặc điểm nổi bật</h6>
-                <p class="card-text">
+                <h6 className="card-title">Đặc điểm nổi bật</h6>
+                <p className="card-text">
                   <i
-                    class="fa-solid fa-circle-check"
+                    className="fa-solid fa-circle-check"
                     style={{ color: "blue" }}
                   ></i>{" "}
                   &nbsp; Cung cấp kiến thức tối ưu từ những thành công và sai
                   lầm của các nhà giao dịch đã kiếm được hàng
                 </p>
-                <p class="card-text">
+                <p className="card-text">
                   <i
-                    class="fa-solid fa-circle-check"
+                    className="fa-solid fa-circle-check"
                     style={{ color: "blue" }}
                   ></i>{" "}
                   &nbsp; Cung cấp kiến thức tối ưu từ những thành công và sai
                   lầm của các nhà giao dịch đã kiếm được hàng
                 </p>
-                <p class="card-text">
+                <p className="card-text">
                   <i
-                    class="fa-solid fa-circle-check"
+                    className="fa-solid fa-circle-check"
                     style={{ color: "blue" }}
                   ></i>{" "}
                   &nbsp; Cung cấp kiến thức tối ưu từ những thành công và sai
@@ -68,36 +131,45 @@ const DetailProduct = () => {
           </div>
           <div className="col-lg-6 col-12">
             <div className="card p-2">
-              <div className="info-author ">
+              <div className="info-author">
                 <img
-                  src="https://salt.tikicdn.com/cache/750x750/ts/product/01/66/58/fe886ea64fb2b7de001d0bc4957fac49.jpg.webp"
-                  alt=""
-                  className="d-block d-lg-none imgae-after-responsive mb-2"
+                  src={book.images[0].thumbnail_url}
+                  alt={book.name}
+                  className="d-block d-lg-none image-after-responsive mb-2"
                 />
-                <div className="d-flex d-flex align-items-center align-content-center">
+                <div className="d-flex align-items-center align-content-center">
                   <i
-                    class="fa-solid fa-circle-check"
+                    className="fa-solid fa-circle-check"
                     style={{ color: "blue" }}
                   ></i>
                   <p style={{ color: "blue" }}>Chính hãng</p>
                   <p>Tác giả:</p>{" "}
                   <a className="ms-2" href="/">
-                    Aleksandra Mizinska, Edo gawa
+                    {book.authors && book.authors[0]
+                      ? book.authors[0].name
+                      : "N/A"}
                   </a>
                 </div>
               </div>
 
               <div className="mt-2">
-                <h5 className="card-title">Bản Đồ</h5>
+                <h5 className="card-title">{book.name}</h5>
                 <div className="vote-product" style={{ fontSize: "12px" }}>
-                  4.8 <i class="fa-solid fa-star color-star"></i>
-                  <i class="fa-solid fa-star color-star"></i>
-                  <i class="fa-solid fa-star color-star"></i>
-                  <i class="fa-regular fa-star"></i>
-                  <i class="fa-regular fa-star"></i> (928) | Đã bán 5000+
+                  {book.ratingAverage}{" "}
+                  {Array.from({ length: 5 }, (_, index) => (
+                    <i
+                      key={index}
+                      className={`fa-star ${
+                        index < book.ratingAverage
+                          ? "fa-solid color-star"
+                          : "fa-regular"
+                      }`}
+                    ></i>
+                  ))}{" "}
+                  ({book.quantitySold.value}) | {book.quantitySold.text}
                 </div>
                 <h6 className="card-product-price mt-2">
-                  250.000 đ &nbsp;
+                  {formatPrice(book.listPrice)} đ&nbsp;
                   <p className="d-inline percent-discount">-2.6%</p>
                 </h6>
               </div>
@@ -105,64 +177,29 @@ const DetailProduct = () => {
               <div className="info-product mt-4 d-none d-lg-block">
                 <h6 style={{ fontSize: "1rem" }}>Thông tin chi tiết</h6>
                 <div className="table-info-product">
-                  <div className="version-book row">
-                    <p className="col-lg-6 info-supiler">Phiên bản sách</p>
-                    <p className="col-lg-6">Phiên bản thường</p>
-                  </div>
-                  <hr />
-                  <div className="version-book row">
-                    <p className="col-lg-6 info-supiler">Công ty phát hành</p>
-                    <p className="col-lg-6">Phiên bản thường</p>
-                  </div>
-                  <hr />
-                  <div className="version-book row">
-                    <p className="col-lg-6 info-supiler">Ngày xuất bản</p>
-                    <p className="col-lg-6">Phiên bản thường</p>
-                  </div>
-                  <hr />
-                  <div className="version-book row">
-                    <p className="col-lg-6 info-supiler">Kích thước</p>
-                    <p className="col-lg-6">Phiên bản thường</p>
-                  </div>
-                  <hr />
-                  <div className="version-book row">
-                    <p className="col-lg-6 info-supiler">Dịch Giá</p>
-                    <p className="col-lg-6">Phiên bản thường</p>
-                  </div>
-                  <hr />
-                  <div className="version-book row">
-                    <p className="col-lg-6 info-supiler">Loại bìa</p>
-                    <p className="col-lg-6">Phiên bản thường</p>
-                  </div>
-                  <hr />
-                  <div className="version-book row">
-                    <p className="col-lg-6 info-supiler">Số trang</p>
-                    <p className="col-lg-6">Phiên bản thường</p>
-                  </div>
-                  <hr />
-                  <div className="version-book row">
-                    <p className="col-lg-6 info-supiler">Nhà xuất bản</p>
-                    <p className="col-lg-6">Nhà xuất bản Lao Động</p>
-                  </div>
+                  {book.specifications.map((spec, index) => (
+                    <div key={index}>
+                      {spec.attributes.map((att, idx) => (
+                        <div className="version-book row" key={idx}>
+                          <p className="col-lg-6 info-supiler">{att.name}</p>
+                          <p className="col-lg-6 info-supiler">{att.value}</p>
+                        </div>
+                      ))}
+                      {index < book.specifications.length - 1 && <hr />}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
 
             <div className="card p-2 mt-3">
               <h6>Mô tả sản phẩm</h6>
-              <img
-                src="https://salt.tikicdn.com/cache/750x750/ts/product/01/66/58/fe886ea64fb2b7de001d0bc4957fac49.jpg.webp"
-                alt=""
+              <img src={book.images[0].base_url} alt="" />
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: formatDescription(book.description),
+                }}
               />
-              <p className="detail-product">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Eligendi, explicabo? Tempora laborum molestias quod at nobis ut
-                incidunt vitae? Accusantium ut ex culpa necessitatibus tempora
-                deserunt beatae eos voluptatibus quidem! Lorem ipsum dolor sit
-                amet consectetur adipisicing elit. Dolor est, quam in explicabo
-                hic aliquam quae reprehenderit, veniam aliquid minus ab dolore
-                voluptatibus fugit iure! Vitae fugit exercitationem dolor error.
-              </p>
             </div>
           </div>
           <div className="col-lg-3">
@@ -172,13 +209,15 @@ const DetailProduct = () => {
                 <button
                   className="sub-product btn-quantity-product"
                   type="button"
+                  onClick={() => handleChangeQuantity(-1)}
                 >
                   -
                 </button>
-                <div className="count-product">1</div>
+                <div className="count-product">{quantity}</div>
                 <button
                   className="plus-product btn-quantity-product"
                   type="button"
+                  onClick={() => handleChangeQuantity(1)}
                 >
                   +
                 </button>
@@ -187,14 +226,22 @@ const DetailProduct = () => {
                 <h6>Tạm tính</h6>
                 <h5 className="card-product-price mt-2">250.000 đ &nbsp;</h5>
               </div>
-              <div class="d-grid gap-2">
-                <button class="btn btn-buy-now" type="button">
-                  Mua ngay
+              <div className="d-grid gap-2">
+                <button
+                  className="btn btn-buy-now"
+                  type="button"
+                  onClick={handleBuyNow}
+                >
+                  Đi tới giỏ hàng
                 </button>
-                <button class="btn btn-status-custom" type="button">
+                <button
+                  className="btn btn-status-custom"
+                  type="button"
+                  onClick={() => handleAddCart()}
+                >
                   Thêm vào giỏ hàng
                 </button>
-                <button class="btn btn-status-custom" type="button">
+                <button className="btn btn-status-custom" type="button">
                   Mua trước trả sau
                 </button>
               </div>
