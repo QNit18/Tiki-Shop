@@ -11,13 +11,11 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "original_price")
+@Table(name = "quantity_sold")
 public class QuantitySold {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     Integer id;
-
-    String text;
-
-    Integer value;
+    private String text;
+    private int value;
 }

@@ -16,43 +16,31 @@ import java.util.List;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-
-    @ManyToOne
-    Author authors;
-
-    String book_cover;
-
-    @ManyToOne
-    Category category;
-
-    @ManyToOne
-    @JoinColumn(name = "current_seller_id")
-    CurrentSeller currentSeller;
-
-    String description;
+    private Long id;
+    private String name;
+    private String bookCover;
+    private String description;
+    private double listPrice;
+    private double originalPrice;
+    private double ratingAverage;
+    private String shortDescription;
+    // other fields
 
     @OneToMany(cascade = CascadeType.ALL)
-    List<Image> image;
+    private List<Author> authors;
 
-    @Column(name = "list_price")
-    Integer listPrice;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Category categories;
 
-    String name;
-
-    @Column(name = "original_price")
-    String originalPrice;
-
-    @ManyToOne
-    @JoinColumn(name = "quantity_sold")
-    QuantitySold quantitySold;
-
-    @Column(name = "rating_average")
-    Float ratingAverage;
-
-    @Column(name = "short_description")
-    String shortDescription;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Seller currentSeller;
 
     @OneToMany(cascade = CascadeType.ALL)
-    List<Attribute> attributes;
+    private List<Image> images;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Specification> specifications;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private QuantitySold quantitySold;
 }
