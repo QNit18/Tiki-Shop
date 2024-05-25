@@ -16,7 +16,7 @@ const Checkout = () => {
       quantity: parseInt(item.quantity)
     }));
     setBooks(updatedBooks);
-  })
+  }, []);
 
   const formatPrice = (price) => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -27,10 +27,24 @@ const Checkout = () => {
   };
 
   const complete = () => {
-    navigate("/complete");
+    const subTotal = books.reduce((total, item) => total + item.price * item.quantity, 0);
+
+    if (selectedMethod === "CreditCard") {
+      fetch(`http://localhost:8080/submitOrder?amount=${subTotal}&orderInfo=Thanh toan don hang 2923`)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          window.location.href = data.url;
+        })
+        .catch(error => {
+          console.error("Error submitting order:", error);
+        });
+    } else {
+      navigate("/complete");
+    }
   }
 
-  const subTotal = books.reduce((total, item) => total + item.price*item.quantity, 0);
+  const subTotal = books.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
     <div className="container mt-3">
@@ -43,15 +57,15 @@ const Checkout = () => {
               className="card p-3"
               style={{ width: "100%", backgroundColor: "#f0f8ff" }}
             >
-              <div class="form-check ">
+              <div className="form-check">
                 <input
-                  class="form-check-input"
+                  className="form-check-input"
                   type="radio"
                   name="flexRadioDefault-check"
                   id="flexRadioDefault-check"
                   checked
                 />
-                <label class="form-check-label" for="flexRadioDefault-check">
+                <label className="form-check-label" htmlFor="flexRadioDefault-check">
                   Giao hàng tiết kiệm
                 </label>
               </div>
@@ -72,14 +86,14 @@ const Checkout = () => {
                       </div>
                       <div className="col-7">
                         <i
-                          class="fa-solid fa-circle-check"
+                          className="fa-solid fa-circle-check"
                           style={{ color: "blue", marginRight: "10px" }}
                         ></i>
                         Chính hãng
                         <div className="info-product-card">
                           <p>{book.name}</p>
                           <div className="can-time-shipping">
-                            <i class="fa-solid fa-truck-fast"></i> Giao thứ 2,
+                            <i className="fa-solid fa-truck-fast"></i> Giao thứ 2,
                             13/05
                           </div>
                           <p>SL: x{book.quantity}</p>
@@ -170,111 +184,111 @@ const Checkout = () => {
           </div>
           {selectedMethod === "Visa" && (
             <div className="card mt-2 p-3">
-                  <div class="col-lg-5">
-                    <div class="card bg-primary text-white rounded-3">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                          <h5 class="mb-0">Card details</h5>
-                          <img
-                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
-                            class="img-fluid rounded-3"
-                            style={{ width: "45px" }}
-                            alt="Avatar"
-                          />
-                        </div>
-
-                        <p class="small mb-2">Card type</p>
-                        <a href="#!" type="submit" class="text-white">
-                          <i class="fab fa-cc-mastercard fa-2x me-2"></i>
-                        </a>
-                        <a href="#!" type="submit" class="text-white">
-                          <i class="fab fa-cc-visa fa-2x me-2"></i>
-                        </a>
-                        <a href="#!" type="submit" class="text-white">
-                          <i class="fab fa-cc-amex fa-2x me-2"></i>
-                        </a>
-                        <a href="#!" type="submit" class="text-white">
-                          <i class="fab fa-cc-paypal fa-2x"></i>
-                        </a>
-
-                        <form class="mt-4">
-                          <div
-                            data-mdb-input-init
-                            class="form-outline form-white mb-4"
-                          >
-                            <input
-                              type="text"
-                              id="typeName"
-                              class="form-control form-control-lg"
-                              siez="17"
-                              placeholder="Cardholder's Name"
-                            />
-                            <label class="form-label" for="typeName">
-                              Cardholder's Name
-                            </label>
-                          </div>
-
-                          <div
-                            data-mdb-input-init
-                            class="form-outline form-white mb-4"
-                          >
-                            <input
-                              type="text"
-                              id="typeText"
-                              class="form-control form-control-lg"
-                              siez="17"
-                              placeholder="1234 5678 9012 3457"
-                              minlength="19"
-                              maxlength="19"
-                            />
-                            <label class="form-label" for="typeText">
-                              Card Number
-                            </label>
-                          </div>
-
-                          <div class="row mb-4">
-                            <div class="col-md-6">
-                              <div
-                                data-mdb-input-init
-                                class="form-outline form-white"
-                              >
-                                <input
-                                  type="text"
-                                  id="typeExp"
-                                  class="form-control form-control-lg"
-                                  placeholder="MM/YYYY"
-                                  size="7"
-                                  minlength="7"
-                                  maxlength="7"
-                                />
-                                <label class="form-label" for="typeExp">
-                                  Expiration
-                                </label>
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                              <div
-                                data-mdb-input-init
-                                class="form-outline form-white"
-                              >
-                                <input
-                                  type="password"
-                                  id="typeText"
-                                  class="form-control form-control-lg"
-                                  placeholder="&#9679;&#9679;&#9679;"
-                                  size="1"
-                                  minlength="3"
-                                  maxlength="3"
-                                />
-                                <label class="form-label" for="typeText">
-                                  Cvv
-                                </label>
-                              </div>
-                            </div>
-                          </div>
-                        </form>
+              <div className="col-lg-5">
+                <div className="card bg-primary text-white rounded-3">
+                  <div className="card-body">
+                    <div className="d-flex justify-content-between align-items-center mb-4">
+                      <h5 className="mb-0">Card details</h5>
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
+                        className="img-fluid rounded-3"
+                        style={{ width: "45px" }}
+                        alt="Avatar"
+                      />
                     </div>
+
+                    <p className="small mb-2">Card type</p>
+                    <a href="#!" type="submit" className="text-white">
+                      <i className="fab fa-cc-mastercard fa-2x me-2"></i>
+                    </a>
+                    <a href="#!" type="submit" className="text-white">
+                      <i className="fab fa-cc-visa fa-2x me-2"></i>
+                    </a>
+                    <a href="#!" type="submit" className="text-white">
+                      <i className="fab fa-cc-amex fa-2x me-2"></i>
+                    </a>
+                    <a href="#!" type="submit" className="text-white">
+                      <i className="fab fa-cc-paypal fa-2x"></i>
+                    </a>
+
+                    <form className="mt-4">
+                      <div
+                        data-mdb-input-init
+                        className="form-outline form-white mb-4"
+                      >
+                        <input
+                          type="text"
+                          id="typeName"
+                          className="form-control form-control-lg"
+                          siez="17"
+                          placeholder="Cardholder's Name"
+                        />
+                        <label className="form-label" htmlFor="typeName">
+                          Cardholder's Name
+                        </label>
+                      </div>
+
+                      <div
+                        data-mdb-input-init
+                        className="form-outline form-white mb-4"
+                      >
+                        <input
+                          type="text"
+                          id="typeText"
+                          className="form-control form-control-lg"
+                          siez="17"
+                          placeholder="1234 5678 9012 3457"
+                          minLength="19"
+                          maxLength="19"
+                        />
+                        <label className="form-label" htmlFor="typeText">
+                          Card Number
+                        </label>
+                      </div>
+
+                      <div className="row mb-4">
+                        <div className="col-md-6">
+                          <div
+                            data-mdb-input-init
+                            className="form-outline form-white"
+                          >
+                            <input
+                              type="text"
+                              id="typeExp"
+                              className="form-control form-control-lg"
+                              placeholder="MM/YYYY"
+                              size="7"
+                              minLength="7"
+                              maxLength="7"
+                            />
+                            <label className="form-label" htmlFor="typeExp">
+                              Expiration
+                            </label>
+                          </div>
+                        </div>
+                        <div className="col-md-6">
+                          <div
+                            data-mdb-input-init
+                            className="form-outline form-white"
+                          >
+                            <input
+                              type="password"
+                              id="typeText"
+                              className="form-control form-control-lg"
+                              placeholder="&#9679;&#9679;&#9679;"
+                              size="1"
+                              minLength="3"
+                              maxLength="3"
+                            />
+                            <label className="form-label" htmlFor="typeText">
+                              Cvv
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
                   </div>
+                </div>
               </div>
             </div>
           )}
@@ -304,7 +318,7 @@ const Checkout = () => {
             </div>
             <br />
             <div style={{ color: "blue", fontSize: "15px" }} className="ms-2">
-              <i class="fa-solid fa-ticket"></i> Chọn hoặc nhập khuyến mại khác
+              <i className="fa-solid fa-ticket"></i> Chọn hoặc nhập khuyến mại khác
             </div>
           </div>
 
@@ -333,7 +347,7 @@ const Checkout = () => {
               </div>
               <div className="row">
                 <div className="col-7">Giảm giá</div>
-                <div className="col-5 " style={{ color: "green" }}>
+                <div className="col-5" style={{ color: "green" }}>
                   -10.000 đ
                 </div>
               </div>
@@ -348,7 +362,7 @@ const Checkout = () => {
           </div>
           <div className="card mt-2">
             <button
-              class="btn btn-buy-now"
+              className="btn btn-buy-now"
               type="button"
               onClick={() => complete()}
             >

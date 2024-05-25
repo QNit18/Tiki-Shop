@@ -12,6 +12,7 @@ import Layout from "./Layout";
 import HomePage from "./Page/HomePage/HomePage";
 import OrderSuccess from "./Page/OrderSucess/OrderSuccess";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import OrderFail from "./Page/OrderFail/OrderFail";
 
 
 const fetchData = async (setBooks) => {
@@ -75,6 +76,14 @@ const Index = () => {
       element: (
         <Layout searchTerm={searchTerm} onSearchChange={handleSearchChange}>
           <OrderSuccess />
+        </Layout>
+      ),
+    },
+    {
+      path: "/orderfail",
+      element: (
+        <Layout searchTerm={searchTerm} onSearchChange={handleSearchChange}>
+          <OrderFail />
         </Layout>
       ),
     },
