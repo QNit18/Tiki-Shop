@@ -5,6 +5,7 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +48,19 @@ public class BookController {
         );
 
         return ResponseEntity.ok(bookService.getAllBook(name, pageRequest));
+    }
+
+    @GetMapping("/categories")
+    public ResponseEntity<Page<Book>> getBooks(
+            @RequestParam(defaultValue = "", name = "name") String category,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "12") int limit) {
+        PageRequest pageRequest =PageRequest.of(
+                page, limit,
+                Sort.by("id").ascending()
+        );
+
+        return ResponseEntity.ok(bookService.getAllBook(category, pageRequest));
     }
 
 }

@@ -6,6 +6,7 @@ import com.qnit18.Tiki_Shop.repo.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,5 +30,9 @@ public class BookService {
 
     public Page<Book> getAllBook(String name, PageRequest pageRequest){
         return bookRepository.searchBooks(name, pageRequest);
+    }
+
+    public Page<Book> getBooksByCategory(String categoryName, PageRequest pageRequest) {
+        return bookRepository.findByCategoryName(categoryName, pageRequest);
     }
 }

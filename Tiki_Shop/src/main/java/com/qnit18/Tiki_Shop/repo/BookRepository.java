@@ -13,4 +13,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
             "WHERE b.name LIKE %:name%")
     Page<Book> searchBooks(@Param("name") String name, Pageable pageable);
 
+    @Query("SELECT b FROM Book b WHERE b.categories.name = :categoryName")
+    Page<Book> findByCategoryName(@Param("categoryName") String categoryName, Pageable pageable);
 }
