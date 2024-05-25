@@ -14,9 +14,11 @@ const HomePage = ({ searchTerm }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:8080/api/books?name=${searchTerm}&page=${currentPage}&limit=${limit}`
-        );
+        let url = `http://localhost:8080/api/books?name=${searchTerm}&page=${currentPage}&limit=${limit}`;
+        if (selectedCategory) {
+          url = `http://localhost:8080/api/books/categories?category=${(selectedCategory)}&page=${currentPage}&limit=${10000}`;
+        }
+        const response = await fetch(url);
         const data = await response.json();
         setBooks(data.content);
         setTotalPages(data.totalPages);
@@ -26,7 +28,7 @@ const HomePage = ({ searchTerm }) => {
     };
 
     fetchData();
-  }, [searchTerm, currentPage, limit]);
+  }, [searchTerm, currentPage, limit, selectedCategory]);
 
   useEffect(() => {
     const filterBooks = () => {
@@ -58,9 +60,12 @@ const HomePage = ({ searchTerm }) => {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
-
   const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
+    if (selectedCategory === category) {
+      setSelectedCategory("");
+    } else {
+      setSelectedCategory(category);
+    }
     setCurrentPage(0); // Reset to the first page on category change
   };
 
