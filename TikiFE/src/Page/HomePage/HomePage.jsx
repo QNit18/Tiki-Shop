@@ -79,9 +79,9 @@ const HomePage = ({ searchTerm }) => {
         <Link to="/">Nhà sách Tiki</Link>
       </div>
       <div className="row main-page">
-        <div className="col-lg-2 category rounded-1 d-none d-xxl-block">
+        <div className="col-lg-2 category rounded-1">
           <div className="info">
-            <h6 className="mt-2">Danh Mục Sản Phẩm</h6>
+            <h6 className="mt-2 d-none d-xxl-block">Danh Mục Sản Phẩm</h6>
             <a
               href="#"
               className={
@@ -127,9 +127,9 @@ const HomePage = ({ searchTerm }) => {
               Tác phẩm kinh điển
             </a>
           </div>
-          <hr />
-          <h6>Nhà cung cấp</h6>
-          <div className="form-supplier">
+          <hr className="d-none d-xxl-block" />
+          <h6 className="d-none d-xxl-block">Nhà cung cấp</h6>
+          <div className="form-supplier d-none d-xxl-block">
             <div className="form-check">
               <input
                 className="form-check-input"
@@ -175,9 +175,9 @@ const HomePage = ({ searchTerm }) => {
               </label>
             </div>
           </div>
-          <hr />
-          <h6>Đánh giá</h6>
-          <div className="star five-star">
+          <hr className="d-none d-xxl-block" />
+          <h6 className="d-none d-xxl-block">Đánh giá</h6>
+          <div className="star five-star d-none d-xxl-block">
             <i className="fa-solid fa-star color-star"></i>
             <i className="fa-solid fa-star color-star"></i>
             <i className="fa-solid fa-star color-star"></i>
@@ -185,7 +185,7 @@ const HomePage = ({ searchTerm }) => {
             <i className="fa-solid fa-star color-star"></i>
             <p className="star-vote">Từ 5 sao</p>
           </div>
-          <div className="star four-star">
+          <div className="star four-star d-none d-xxl-block">
             <i className="fa-solid fa-star color-star"></i>
             <i className="fa-solid fa-star color-star"></i>
             <i className="fa-solid fa-star color-star"></i>
@@ -193,7 +193,7 @@ const HomePage = ({ searchTerm }) => {
             <i className="fa-regular fa-star"></i>
             <p className="star-vote">Từ 4 sao</p>
           </div>
-          <div className="star three-star">
+          <div className="star three-star d-none d-xxl-block">
             <i className="fa-solid fa-star color-star"></i>
             <i className="fa-solid fa-star color-star"></i>
             <i className="fa-solid fa-star color-star"></i>
